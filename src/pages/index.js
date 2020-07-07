@@ -14,13 +14,13 @@ export default function Home({data}) {
     <h2>被開示請求者一覧</h2>
     <ul>
       {data.targets.distinct.map((target, i) => (
-        <li><Link to={`/target/${target}`}>{target}</Link> ({data.targets.group[i].totalCount})</li>
+        <li><Link to={`/target/${encodeURIComponent(target)}`}>{target}</Link> ({data.targets.group[i].totalCount})</li>
       ))}
     </ul>
     <h2>開示請求者一覧</h2>
     <ul>
       {data.actors.group.map((actor, i) => (
-        <li><Link to={`/actor/${actor.nodes[0].disclosure_actor}`}>{actor.nodes[0].disclosure_actor}</Link> ({actor.totalCount})</li>
+        <li><Link to={`/actor/${encodeURIComponent(actor.nodes[0].disclosure_actor)}`}>{actor.nodes[0].disclosure_actor}</Link> ({actor.totalCount})</li>
       ))}
     </ul>
   </>
