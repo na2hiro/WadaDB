@@ -11,12 +11,12 @@ export default function Disclosure({data}) {
         explanation = <>
           <h2>解説</h2>
           {disclosure.explanation && <p>{disclosure.explanation}</p>}
-          {disclosure.result_article_url && <p><a href={disclosure.result_article_url} target="_blank">元記事</a></p>}
+          {disclosure.result_article_url && <p><a href={disclosure.result_article_url} target="_blank" rel="noreferrer noopener">元記事</a></p>}
           </>
       }
       result = <>
         {disclosure.result === "不開示" ? <p>{disclosure.reason_of_no_disclosure}</p> : ""}
-        {disclosure.result_img_url && <p><img src={disclosure.result_img_url} /></p>}
+        {disclosure.result_img_url && <p><img src={disclosure.result_img_url} style={{width: "100%", maxWidth: "800px"}} /></p>}
         {explanation}
       </>;
   }
@@ -30,10 +30,7 @@ export default function Disclosure({data}) {
     </ul>
     <h2>結果: {disclosure.result}</h2>
     {result}
-
-
-    <pre>{JSON.stringify(disclosure, null, 2)}</pre>
-    </>
+  </>;
 }
 
 export const query = graphql`
@@ -49,6 +46,7 @@ export const query = graphql`
       reason_of_no_disclosure
       result
       result_article_url
+      result_img_url
     }
   }
 }
