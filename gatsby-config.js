@@ -5,6 +5,7 @@
  */
 
 module.exports = {
+  pathPrefix: '/WadaDB',
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
