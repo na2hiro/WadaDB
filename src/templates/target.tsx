@@ -1,10 +1,12 @@
 import { graphql, Link } from "gatsby"
 import React from "react";
+import Head from "../components/Head"
 
 export default function Target ({data}) {
   const target = data.target.nodes[0];
   const disclosures = data.disclosures.nodes;
   return <>
+    <Head title={`WadaDB: ${target.name}に関する開示`} description={`${target.name}に関する開示`}/>
     <h1>{target.name}</h1>
     {target.img_url && <p><img src={target.img_url} style={{width: "100%", maxWidth: "300px"}} /></p>}
     <h2>{target.name}に関する開示</h2>

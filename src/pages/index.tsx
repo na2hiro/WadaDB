@@ -1,9 +1,10 @@
 import React from "react"
 import {Link, graphql} from "gatsby";
+import Head from "../components/Head"
 
 export default function Home({data}) {
-  console.log(data);
   return <>
+    <Head title={"WadaDB: 情報開示データベース"} />
     <h1>WadaDB: 情報開示データベース</h1>
     <h2>最新の開示</h2>
     <ul>
@@ -24,7 +25,7 @@ export default function Home({data}) {
       ))}
     </ul>
   </>
-}
+};
 
 export const query = graphql`
 query MyQuery {
@@ -49,4 +50,4 @@ query MyQuery {
     }
   }
 }
-`
+`;

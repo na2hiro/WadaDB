@@ -1,5 +1,6 @@
 import React from "react";
 import {graphql} from "gatsby";
+import Head from "../components/Head"
 
 export default function Disclosure({data}) {
   const disclosure = data.allWadaDbDisclosureTsv.nodes[0];
@@ -22,6 +23,7 @@ export default function Disclosure({data}) {
       </>;
   }
   return <>
+    <Head title={`WadaDB 開示請求: ${disclosure.disclosure_description}`} description={`開示請求: ${disclosure.disclosure_description}`} />
     <h1>開示請求: {disclosure.disclosure_description}</h1>
     <h2>開示請求詳細</h2>
     <ul>
