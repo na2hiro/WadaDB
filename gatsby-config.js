@@ -20,5 +20,6 @@ module.exports = {
         delimiter: '\t'
       },
     },
+    "gatsby-plugin-typescript"
   ]
 }

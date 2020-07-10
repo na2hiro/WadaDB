@@ -1,5 +1,6 @@
-const React = require ("react");
-const {graphql} = require("gatsby");
+import React from "react";
+import {graphql} from "gatsby";
+
 export default function Disclosure({data}) {
   const disclosure = data.allWadaDbDisclosureTsv.nodes[0];
 

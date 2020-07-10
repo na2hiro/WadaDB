@@ -1,5 +1,6 @@
-const React = require("react");
-const {Link} = require("gatsby");
+import { graphql, Link } from "gatsby"
+import React from "react";
+
 export default function Target ({data}) {
   const target = data.target.nodes[0];
   const disclosures = data.disclosures.nodes;
