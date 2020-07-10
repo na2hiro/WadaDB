@@ -8,12 +8,13 @@
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
-    "serve": "gatsby serve",
+    "serve": "gatsby serve --prefix-paths",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
     "gatsby": "^2.23.12",
+    "gatsby-plugin-google-analytics": "^2.3.11",
     "gatsby-source-filesystem": "^2.3.18",
     "gatsby-transformer-csv": "^2.3.9",
     "react": "^16.12.0",
