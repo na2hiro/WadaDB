@@ -1,7 +1,7 @@
 import { graphql } from "gatsby"
 import React from "react"
 import Layout from "../components/Layout"
-import Link from "../components/Link"
+import Link, { ExternalLink } from "../components/Link"
 import { createStyles, Theme, Typography } from "@material-ui/core"
 import Box from "@material-ui/core/Box"
 import Avatar from "@material-ui/core/Avatar"
@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function Actor({ data }) {
   const classes = useStyles()
-  console.log(data)
   const actor = data.actor.nodes[0]
   const disclosures = data.disclosures.nodes
   return <Layout title={`WadaDB: ${actor.name}による開示`} description={`${actor.name}による開示`}>
@@ -40,15 +39,15 @@ export default function Actor({ data }) {
 
           <p>{actor.message}</p>
           {actor.twitter_id && <Box>
-            <Link to={`https://twitter.com/${actor.twitter_id}?ref_src=twsrc%5Etfw`}
+            <ExternalLink to={`https://twitter.com/${actor.twitter_id}?ref_src=twsrc%5Etfw`}
                   className="twitter-follow-button" data-size="large"
                   data-show-count="false">
               Follow @{actor.twitter_id}
               <Helmet>
                 <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"/>
               </Helmet>
-            </Link></Box>}
-          {actor.note_id && <Box><Link to={`https://note.com/${actor.note_id}`}>note.com/{actor.note_id}</Link></Box>}
+            </ExternalLink></Box>}
+          {actor.note_id && <Box><ExternalLink to={`https://note.com/${actor.note_id}`}>note.com/{actor.note_id}</ExternalLink></Box>}
         </Box>
       </Paper>
       <Box my={2}>
