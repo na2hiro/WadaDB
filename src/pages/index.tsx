@@ -48,7 +48,7 @@ export default function Home({ data }) {
 
 export const query = graphql`
 query MyQuery {
-  latest: allWadaDbDisclosureTsv(filter: {disclosure_description: {ne: ""}}, limit:5, sort: {fields: id, order: DESC}) {
+  latest: allWadaDbDisclosureTsv(filter: {disclosure_description: {ne: ""}}, sort: {fields: last_modified_date, order: DESC}) {
     nodes {
       id
       disclosure_description

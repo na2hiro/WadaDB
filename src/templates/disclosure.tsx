@@ -4,6 +4,7 @@ import Layout from "../components/Layout"
 import { Typography } from "@material-ui/core"
 import Link from "../components/Link"
 import Box from "@material-ui/core/Box"
+import { stringifyDate } from "../utils"
 
 export default function Disclosure({data}) {
   const disclosure = data.allWadaDbDisclosureTsv.nodes[0];
@@ -44,7 +45,8 @@ export default function Disclosure({data}) {
       <ul>
         <li>開示請求人: <Link to={`/actors/${disclosure.disclosure_actor}`}>{disclosure.disclosure_actor}</Link></li>
         <li>主な請求対象: <Link to={`/targets/${disclosure.disclosure_target}`}>{disclosure.disclosure_target}</Link></li>
-        {/*<li>開示請求日時: {disclosure.disclosure_action_date}</li>*/}
+        {disclosure.submission_date && <li>開示請求日時: {stringifyDate(disclosure.submission_date)}</li>}
+        {disclosure.result_date && <li>開示・不開示日時: {stringifyDate(disclosure.result_date)}</li>}
       </ul>
     </Typography>
 
@@ -63,11 +65,13 @@ export const query = graphql`
       disclosure_actor
       disclosure_description
       disclosure_target
+      submission_date
       submission_article_url
       explanation
       id
-      reason_of_no_disclosure
+      result_date
       result
+      reason_of_no_disclosure
       result_article_url
       result_img_url
     }
