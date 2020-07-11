@@ -19,15 +19,16 @@ export default function Home({ data }) {
       </Typography>
       <ul>
         {data.latest.nodes.map(item => (
-          <li><Link to={`/disclosure/${item.id}`}>{item.disclosure_description}</Link></li>
+          <li><Link to={`/disclosures/${item.id}`}>{item.disclosure_description}</Link></li>
         ))}
       </ul>
       <Typography variant="h6" component="h2">
         被開示請求者一覧
       </Typography>
       <ul>
-        {data.targets.distinct.map((target, i) => (
-          <li><Link to={`/target/${encodeURIComponent(target)}`}>{target}</Link> ({data.targets.group[i].totalCount})
+        {/* TODO sort in GraphQL */}
+        {data.targets.group.sort((t1,t2)=>t2.totalCount-t1.totalCount).map((target, i) => (
+          <li><Link to={`/targets/${encodeURIComponent(target.nodes[0].disclosure_target)}`}>{target.nodes[0].disclosure_target}</Link> ({target.totalCount})
           </li>
         ))}
       </ul>
@@ -35,9 +36,9 @@ export default function Home({ data }) {
         開示請求者一覧
       </Typography>
       <ul>
-        {data.actors.group.map((actor, i) => (
+        {data.actors.group.sort((a1,a2)=>a2.totalCount-a1.totalCount).map((actor, i) => (
           <li><Link
-            to={`/actor/${encodeURIComponent(actor.nodes[0].disclosure_actor)}`}>{actor.nodes[0].disclosure_actor}</Link> ({actor.totalCount})
+            to={`/actors/${encodeURIComponent(actor.nodes[0].disclosure_actor)}`}>{actor.nodes[0].disclosure_actor}</Link> ({actor.totalCount})
           </li>
         ))}
       </ul>
@@ -54,9 +55,11 @@ query MyQuery {
     }
   }
   targets: allWadaDbDisclosureTsv(filter: {disclosure_description: {ne: ""}}) {
-    distinct(field: disclosure_target)
-    group(field: id) {
+    group(field: disclosure_target, limit: 1) {
       totalCount
+      nodes {
+        disclosure_target
+      }
     }
   }
   actors: allWadaDbDisclosureTsv(filter: {disclosure_description: {ne: ""}}) {

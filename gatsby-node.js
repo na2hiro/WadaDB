@@ -8,7 +8,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
   switch(node.internal.type) {
     case "WadaDbDisclosureTsv":
       if(node.disclosure_description==="") return;
-      slug = `/disclosure/${node.id}`
+      slug = `/disclosures/${node.id}`
       createNodeField({
         node,
         name: `slug`,
@@ -16,7 +16,15 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       })
       break;
     case "WadaDbTargetTsv":
-      slug = `/target/${node.name}`
+      slug = `/targets/${node.name}`
+      createNodeField({
+        node,
+        name: `slug`,
+        value: slug,
+      })
+      break;
+    case "WadaDbActorTsv":
+      slug = `/actors/${node.name}`
       createNodeField({
         node,
         name: `slug`,
@@ -48,6 +56,15 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
+      allWadaDbActorTsv {
+        edges {
+          node {
+            fields {
+              slug
+            }
+          }
+        }
+      }
     }
   `)
   result.data.allWadaDbDisclosureTsv.edges.forEach(({ node }) => {
@@ -71,6 +88,20 @@ exports.createPages = async ({ graphql, actions }) => {
         // Data passed to context is available
         // in page queries as GraphQL variables.
         targetName,
+      },
+    })
+  })
+  result.data.allWadaDbActorTsv.edges.forEach(({ node }) => {
+    const pathFragments = node.fields.slug.split("/");
+    const actorName = pathFragments[pathFragments.length-1];
+    console.log("actorNAme", actorName);
+    createPage({
+      path: node.fields.slug,
+      component: path.resolve(`./src/templates/actor.tsx`),
+      context: {
+        // Data passed to context is available
+        // in page queries as GraphQL variables.
+        actorName,
       },
     })
   })

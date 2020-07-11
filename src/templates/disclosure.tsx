@@ -42,8 +42,8 @@ export default function Disclosure({data}) {
     </Typography>
     <Typography variant="body1">
       <ul>
-        <li>開示請求人: {disclosure.disclosure_actor}</li>
-        <li>主な請求対象: <Link to={`/target/${disclosure.disclosure_target}`}>{disclosure.disclosure_target}</Link></li>
+        <li>開示請求人: <Link to={`/actors/${disclosure.disclosure_actor}`}>{disclosure.disclosure_actor}</Link></li>
+        <li>主な請求対象: <Link to={`/targets/${disclosure.disclosure_target}`}>{disclosure.disclosure_target}</Link></li>
         {/*<li>開示請求日時: {disclosure.disclosure_action_date}</li>*/}
       </ul>
     </Typography>

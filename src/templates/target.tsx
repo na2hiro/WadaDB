@@ -20,7 +20,7 @@ export default function Target({ data }) {
       <ul>
         {disclosures.map(disclosure => (
           <li>{disclosure.explanation} (開示請求: <Link
-            to={`/disclosure/${disclosure.id}`}>{disclosure.disclosure_description}</Link>)</li>
+            to={`/disclosures/${disclosure.id}`}>{disclosure.disclosure_description}</Link>)</li>
         ))}
       </ul>
     </Box>
