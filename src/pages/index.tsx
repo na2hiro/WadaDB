@@ -14,6 +14,10 @@ export default function Home({ data }) {
       <p>
         WadaDBは、行政文書の情報開示請求により得られた知見を蓄積するデータベースを目指す有志のプロジェクトです。
       </p>
+      <p>
+        <Link to={"/about"}>このプロジェクトについて</Link>
+      </p>
+
       <Typography variant="h6" component="h2">
         最新の開示
       </Typography>

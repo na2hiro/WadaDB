@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import Container from "@material-ui/core/Container"
 import Link from "./Link"
+import Box from "@material-ui/core/Box"
 
 interface HideOnScrollProps {
   children: React.ReactElement;
@@ -48,6 +49,10 @@ const Layout: FunctionComponent<Props> = ({ title, description = "", children })
     <Toolbar/>
     <Container>
       {children}
+
+      <Box my={2}>
+        <Link to={"/"}>トップに戻る</Link>
+      </Box>
     </Container>
   </>
 }
