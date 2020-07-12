@@ -9,6 +9,8 @@ import Grid from "@material-ui/core/Grid"
 import makeStyles from "@material-ui/core/styles/makeStyles"
 import { Helmet } from "react-helmet"
 import Paper from "@material-ui/core/Paper"
+import WebIcon from '@material-ui/icons/Web';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,6 +28,7 @@ export default function Actor({ data }) {
     <Box my={2}>
       <Paper>
         <Box my={2} p={2}>
+          <Box mb={2}>
           <Typography variant="h5" component="h1">
             <Grid container spacing={2}>
               <Grid item>
@@ -36,8 +39,9 @@ export default function Actor({ data }) {
               </Grid>
             </Grid>
           </Typography>
+          </Box>
 
-          <p>{actor.message}</p>
+          {actor.message && <p>{actor.message}</p>}
           {actor.twitter_id && <Box>
             <ExternalLink to={`https://twitter.com/${actor.twitter_id}?ref_src=twsrc%5Etfw`}
                   className="twitter-follow-button" data-size="large"
@@ -47,7 +51,22 @@ export default function Actor({ data }) {
                 <script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"/>
               </Helmet>
             </ExternalLink></Box>}
-          {actor.note_id && <Box><ExternalLink to={`https://note.com/${actor.note_id}`}>note.com/{actor.note_id}</ExternalLink></Box>}
+          {actor.note_id && <Box>
+            <ExternalLink to={`https://note.com/${actor.note_id}`} style={{display: "inline-block"}}>
+              <Box display={"flex"} alignItems={"center"} >
+                <WebIcon />
+                note.com/{actor.note_id}
+              </Box>
+            </ExternalLink>
+          </Box>}
+          {actor.donation_url && <Box>
+            <ExternalLink to={actor.donation_url} style={{display: "inline-block"}}>
+              <Box display={"flex"} alignItems={"center"}>
+                <MonetizationOnIcon />
+                この開示請求者にカンパする
+              </Box>
+            </ExternalLink>
+          </Box>}
         </Box>
       </Paper>
       <Box my={2}>
@@ -70,6 +89,7 @@ query($actorName: String!) {
     nodes {
       name
       avatar_url
+      donation_url
       message
       note_id
       twitter_id

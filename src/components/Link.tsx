@@ -14,5 +14,5 @@ const Link: FunctionComponent<Props> = ({to, children, ...rest}) => {
 export default Link;
 
 export const ExternalLink: FunctionComponent<Props> = ({to, children, ...rest}) => {
-  return <MaterialLink href={to} {...rest}>{children}</MaterialLink>
+  return <MaterialLink href={to} target="_blank" rel="noopener noreferrer" {...rest}>{children}</MaterialLink>
 }
