@@ -5,7 +5,7 @@ import { Typography } from "@material-ui/core"
 import { ExternalLink } from "../components/Link"
 
 export default function About() {
-  return <Layout title="WadaDBについて" description="WadaDB: 情報開示データベースについて">
+  return <Layout title="WadaDB: 情報開示データベースについて" description="WadaDB: 情報開示データベースについて">
     <Box my={2}>
       <Typography variant="h5" component="h1">
         WadaDBについて

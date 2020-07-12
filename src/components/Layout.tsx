@@ -28,13 +28,33 @@ function HideOnScroll(props: HideOnScrollProps) {
 type Props = {
   title: string;
   description?: string;
+  isArticle?: boolean;
 }
-const Layout: FunctionComponent<Props> = ({ title, description = "", children }) => {
+const Layout: FunctionComponent<Props> = ({ title, description = "", children, isArticle=false }) => {
+  const seo = {
+    url: null,
+    image: null,
+    title,
+    description: isArticle && description ? description : `WadaDBは公的機関に対する情報開示請求のデータベースです。${description}`,
+    twitterUsername: "na2hiro"
+  }
   return <>
     <Helmet>
       <html lang="ja"/>
       <title>{title}</title>
-      <meta name="description" content={`WadaDBは公的機関に対する情報開示請求のデータベースです。${description}`}/>
+      <meta name="description" content={seo.description}/>
+      {seo.url && <meta property="og:url" content={seo.url} />}
+      {isArticle && <meta property="og:type" content="article" />}
+      {seo.title && <meta property="og:title" content={seo.title} />}
+      <meta property="og:description" content={seo.description} />
+      {seo.image && <meta property="og:image" content={seo.image} />}
+      <meta name="twitter:card" content="summary_large_image" />
+      {seo.twitterUsername && (
+        <meta name="twitter:creator" content={seo.twitterUsername} />
+      )}
+      {seo.title && <meta name="twitter:title" content={seo.title} />}
+      <meta name="twitter:description" content={seo.description} />
+      {seo.image && <meta name="twitter:image" content={seo.image} />}
     </Helmet>
     <CssBaseline/>
     <HideOnScroll>

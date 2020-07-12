@@ -21,7 +21,6 @@ export default function Disclosure({ data }) {
   const disclosure = data.allWadaDbDisclosureTsv.nodes[0]
 
   let result = null
-  console.log(disclosure)
   switch (disclosure.result) {
     case "不開示決定":
     case "開示決定":
@@ -73,7 +72,7 @@ export default function Disclosure({ data }) {
   }
 
   return <Layout title={`WadaDB 開示請求: ${disclosure.disclosure_description}`}
-                 description={`開示請求: ${disclosure.disclosure_description}`}>
+                 description={`開示請求: ${disclosure.disclosure_description}`} isArticle={true}>
     <Box my={2}>
       <Typography variant="h5" component="h1">
         開示請求: {disclosure.disclosure_description}

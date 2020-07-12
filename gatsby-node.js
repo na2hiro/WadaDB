@@ -94,7 +94,6 @@ exports.createPages = async ({ graphql, actions }) => {
   result.data.allWadaDbActorTsv.edges.forEach(({ node }) => {
     const pathFragments = node.fields.slug.split("/");
     const actorName = pathFragments[pathFragments.length-1];
-    console.log("actorNAme", actorName);
     createPage({
       path: node.fields.slug,
       component: path.resolve(`./src/templates/actor.tsx`),
