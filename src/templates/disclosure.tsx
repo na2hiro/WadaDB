@@ -7,6 +7,7 @@ import Box from "@material-ui/core/Box"
 import { stringifyDate } from "../utils"
 import DescriptionIcon from "@material-ui/icons/Description"
 import makeStyles from "@material-ui/core/styles/makeStyles"
+import LinkIcon from '@material-ui/icons/Link';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +24,7 @@ export default function Disclosure({ data }) {
   let result = null
   switch (disclosure.result) {
     case "不開示決定":
+    case "不開示（取り下げ）":
     case "開示決定":
     case "開示":
       result = <>
@@ -38,7 +40,7 @@ export default function Disclosure({ data }) {
 
           {disclosure.reason_of_no_disclosure && <>
             {
-              disclosure.result !== "不開示決定" &&
+              disclosure.result.indexOf("不開示")>0 &&
               <Typography variant="subtitle1" component="h3">
                 不開示部分に関して
               </Typography>
@@ -64,7 +66,9 @@ export default function Disclosure({ data }) {
         {disclosure.explanation && <Box>{disclosure.explanation}</Box>}
         {disclosure.result_article_urls && <Box>
           {disclosure.result_article_urls.split(" ").map(url => <>
-            <a href={url} target="_blank" rel="noreferrer noopener">元記事</a>{" "}
+            <span style={{display: "inline-block"}}>
+              <ExternalLink to={url} style={{display: "flex"}}><LinkIcon />元記事</ExternalLink>{" "}
+            </span>
           </>)}
         </Box>}
       </Typography>

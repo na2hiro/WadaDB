@@ -26,6 +26,9 @@ export default function Home({ data }) {
           <li><Link to={`/disclosures/${item.id}`}>{item.disclosure_description}</Link></li>
         ))}
       </ul>
+      <p>
+        <Link to={"/disclosures/"}>すべての開示</Link> ({data.all.totalCount})
+      </p>
       <Typography variant="h6" component="h2">
         被開示請求者一覧
       </Typography>
@@ -52,11 +55,14 @@ export default function Home({ data }) {
 
 export const query = graphql`
 query MyQuery {
-  latest: allWadaDbDisclosureTsv(filter: {disclosure_description: {ne: ""}}, sort: {fields: last_modified_date, order: DESC}) {
+  latest: allWadaDbDisclosureTsv(filter: {disclosure_description: {ne: ""}}, sort: {fields: last_modified_date, order: DESC}, limit: 10) {
     nodes {
       id
       disclosure_description
     }
+  }
+  all: allWadaDbDisclosureTsv(filter: {disclosure_description: {ne: ""}}) {
+    totalCount
   }
   targets: allWadaDbDisclosureTsv(filter: {disclosure_description: {ne: ""}}) {
     group(field: disclosure_target, limit: 1) {
